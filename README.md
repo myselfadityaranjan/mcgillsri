@@ -2,7 +2,7 @@
 
 A modern, accessible website for the Student Research Initiative at McGill University, built with Next.js 14 and designed with a futuristic, matte aesthetic.
 
-![SRI Website](public/og.jpg)
+![SRI Website](public/sri-og.jpg)
 
 ## 🚀 Features
 
@@ -54,7 +54,7 @@ A modern, accessible website for the Student Research Initiative at McGill Unive
   utils.ts              # Utility functions
 /public
   sri-logo.svg              # SRI logo
-  og.jpg                # Open Graph image
+  sri-og.jpg                # Open Graph image
 \`\`\`
 
 ## 🚀 Getting Started

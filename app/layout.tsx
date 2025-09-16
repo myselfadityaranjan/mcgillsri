@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "Student Research Initiative",
     images: [
       {
-        url: "/og.jpg",
+        url: "/sri-og.jpg",
         width: 1200,
         height: 630,
         alt: "Student Research Initiative - McGill University",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     title: "Student Research Initiative - McGill University",
     description:
       "For Students, By Students. Creating research opportunities and connecting undergraduate students with labs.",
-    images: ["/og.jpg"],
+    images: ["/sri-og.jpg"],
     creator: "@SRI_McGill",
   },
   alternates: {
