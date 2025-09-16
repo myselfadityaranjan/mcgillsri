@@ -1,0 +1,318 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #081327;
+  --foreground: #ffffff;
+  --card: #0b1f3b;
+  --card-foreground: #ffffff;
+  --popover: #0b1f3b;
+  --popover-foreground: #ffffff;
+  --primary: #0b1f3b;
+  --primary-foreground: #ffffff;
+  --secondary: #0e274d;
+  --secondary-foreground: #ffffff;
+  --muted: #0e274d;
+  --muted-foreground: #f5f7fb;
+  --accent: #3ba7ff;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #3ba7ff;
+  --chart-1: #3ba7ff;
+  --chart-2: #9dd7ff;
+  --chart-3: #0e274d;
+  --chart-4: #6b7280;
+  --chart-5: #f5f7fb;
+  --radius: 0.625rem;
+  --sidebar: #0b1f3b;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #3ba7ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #0e274d;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #3ba7ff;
+
+  /* SRI Brand Colors */
+  --primary-900: #081327;
+  --primary-700: #0e274d;
+  --primary-base: #0b1f3b;
+  --accent-sky: #3ba7ff;
+  --accent-200: #9dd7ff;
+  --neutral-50: #f9fafb;
+  --neutral-100: #ffffff;
+  --neutral-200: #f5f7fb;
+  --neutral-300: #d1d5db;
+  --neutral-700: #6b7280;
+  --neutral-900: #0f172a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* SRI custom colors */
+  --color-primary-900: var(--primary-900);
+  --color-primary-700: var(--primary-700);
+  --color-primary-base: var(--primary-base);
+  --color-accent-sky: var(--accent-sky);
+  --color-accent-200: var(--accent-200);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-900: var(--neutral-900);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(59, 167, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 167, 255, 0.5);
+}
+
+/* Focus styles with proper contrast */
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary-900;
+}
+
+/* Glass effect */
+.glass {
+  backdrop-filter: blur(12px);
+  background: rgba(11, 31, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Enhanced animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(59, 167, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 167, 255, 0.5);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -12px rgba(11, 31, 59, 0.6);
+}
+
+/* Text effects */
+.text-glow {
+  text-shadow: 0 0 20px rgba(59, 167, 255, 0.5);
+}
+
+/* Button enhancements */
+.btn-primary {
+  background: linear-gradient(135deg, #3ba7ff 0%, #2196f3 100%);
+  box-shadow: 0 4px 15px rgba(59, 167, 255, 0.3);
+  transition: all 0.2s ease-out;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(59, 167, 255, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Card enhancements */
+.card-interactive {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(59, 167, 255, 0.3);
+  box-shadow: 0 20px 40px -12px rgba(11, 31, 59, 0.8);
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass {
+    background: rgba(11, 31, 59, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* Neon glow effect for the tagline */
+.neon-glow {
+  text-shadow: 0 0 5px rgba(236, 72, 153, 0.5), 0 0 10px rgba(236, 72, 153, 0.4), 0 0 15px rgba(236, 72, 153, 0.3), 0 0
+    20px rgba(236, 72, 153, 0.2);
+  filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.3));
+  transition: all 0.3s ease-out;
+}
+
+.neon-glow:hover {
+  text-shadow: 0 0 8px rgba(236, 72, 153, 0.7), 0 0 16px rgba(236, 72, 153, 0.6), 0 0 24px rgba(236, 72, 153, 0.5), 0 0
+    32px rgba(236, 72, 153, 0.4);
+  filter: drop-shadow(0 0 12px rgba(236, 72, 153, 0.5));
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(236, 72, 153, 0.5), 0 0 10px rgba(236, 72, 153, 0.4), 0 0 15px rgba(236, 72, 153, 0.3), 0
+      0 20px rgba(236, 72, 153, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(236, 72, 153, 0.7), 0 0 16px rgba(236, 72, 153, 0.6), 0 0 24px rgba(236, 72, 153, 0.5), 0
+      0 32px rgba(236, 72, 153, 0.4);
+  }
+}
