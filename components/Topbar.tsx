@@ -31,7 +31,7 @@ export function Topbar() {
           </Sheet>
 
           <Link href="/" className="flex items-center gap-3 focus-ring rounded-lg p-1">
-            <Image src="/logo.svg" alt="SRI Logo" width={32} height={32} className="w-8 h-8" />
+            <Image src="/sri-logo.svg" alt="SRI Logo" width={32} height={32} className="w-8 h-8" />
             <span className="font-semibold text-lg text-white">{SITE_CONFIG.shortName}</span>
           </Link>
         </div>

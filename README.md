@@ -53,7 +53,7 @@ A modern, accessible website for the Student Research Initiative at McGill Unive
   validations.ts        # Zod schemas
   utils.ts              # Utility functions
 /public
-  logo.svg              # SRI logo
+  sri-logo.svg              # SRI logo
   og.jpg                # Open Graph image
 \`\`\`
 

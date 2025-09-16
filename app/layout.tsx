@@ -61,8 +61,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
       <head>
-        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/logo.svg" />
+        <link rel="icon" href="/sri-logo.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/sri-logo.svg" />
         <meta name="theme-color" content="#0B1F3B" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>

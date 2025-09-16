@@ -65,7 +65,7 @@ export default function HomePage() {
             <motion.div variants={fadeUpVariants} className="relative">
               <div className="relative p-8 rounded-3xl glass border border-white/10">
                 <Image
-                  src="/logo.svg"
+                  src="/sri-logo.svg"
                   alt="SRI Logo"
                   width={200}
                   height={200}
