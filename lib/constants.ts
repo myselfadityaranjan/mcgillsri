@@ -85,3 +85,14 @@ Click the button below to check out our database with the list of currently avai
 
 In order to access the database and apply for the positions, you must have a membership with SRI.`,
 } as const
+
+// lib/constants.ts (add this at the end of the file)
+export const NAV_GROUPS: Record<string, { title: string; href: string }[]> = {
+  Resources: [
+    { title: "Opportunities at IRCM", href: "/resources/opportunities-at-ircm" },
+    { title: "SRI Studentship Award", href: "/resources/sri-studentship-award" },
+    { title: "SRI Mentor Program", href: "/resources/mentor-program" },
+    { title: "YouTube Series", href: "/resources/youtube-series" },
+    { title: "Student Handbook", href: "/resources/student-handbook" },
+  ],
+}
