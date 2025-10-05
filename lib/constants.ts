@@ -27,6 +27,11 @@ export const NAV_ITEMS = [
     href: "/team",
     icon: "UsersRound",
   },
+    {
+    title: "Events",
+    href: "/events",
+    icon: "UsersRound",
+  },
   {
     title: "SRI Volunteer Database",
     href: "/volunteer-database",
