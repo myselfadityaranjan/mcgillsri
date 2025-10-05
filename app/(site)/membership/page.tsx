@@ -123,7 +123,8 @@ export default function MembershipPage() {
           </div>
         </motion.div>
       </Section>
+
+     <NewsletterSignup />
     </div>
   )
-  <NewsletterSignup />
 }
