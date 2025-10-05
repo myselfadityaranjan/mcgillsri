@@ -5,6 +5,7 @@ import Link from "next/link"
 import { UserPlus, Clock, Star, ArrowLeft, CheckCircle } from "lucide-react"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
+import NewsletterSignup from "@/components/NewsletterSignup"
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -125,3 +126,5 @@ export default function MembershipPage() {
     </div>
   )
 }
+
+<NewsletterSignup />
