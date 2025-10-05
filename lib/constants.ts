@@ -23,6 +23,11 @@ export const NAV_ITEMS = [
     icon: "BookOpen",
   },
   {
+    title: "Meet the Team",
+    href: "/team",
+    icon: "UsersRound",
+  },
+  {
     title: "SRI Volunteer Database",
     href: "/volunteer-database",
     icon: "Database",
