@@ -4,6 +4,7 @@ import { Sidebar } from "@/components/Sidebar"
 import { Footer } from "@/components/Footer"
 import { ChatWidget } from "@/components/ChatWidget"
 import { Toaster } from "@/components/ui/toaster"
+import { BreadcrumbTrail } from "@/components/BreadcrumbTrail"
 
 export default function SiteLayout({
   children,
@@ -22,7 +23,10 @@ export default function SiteLayout({
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 lg:ml-72 min-h-[calc(100vh-4rem)]">{children}</main>
+        <main className="flex-1 lg:ml-72 min-h-[calc(100vh-4rem)]">
+          <BreadcrumbTrail />
+          {children}
+        </main>
       </div>
       <Footer />
 

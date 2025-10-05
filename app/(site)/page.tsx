@@ -9,20 +9,7 @@ import { CardFeature } from "@/components/CardFeature"
 import { FancyButton } from "@/components/FancyButton"
 import { EmptyState } from "@/components/EmptyState"
 import { CONTENT } from "@/lib/constants"
-
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-}
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
+import { fadeUp, staggerChildren } from "@/lib/motion"
 
 export default function HomePage() {
   return (
@@ -35,10 +22,10 @@ export default function HomePage() {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl" />
         </div>
 
-        <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="relative z-10">
+        <motion.div initial="hidden" animate="visible" variants={staggerChildren()} className="relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <motion.div variants={fadeUpVariants} className="mb-6">
+              <motion.div variants={fadeUp} className="mb-6">
                 <p className="text-accent font-medium text-sm uppercase tracking-wider mb-4">McGill University</p>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white mb-6 text-balance leading-tight">
                   Student Research Initiative
@@ -49,7 +36,7 @@ export default function HomePage() {
                 </p>
               </motion.div>
 
-              <motion.div variants={fadeUpVariants} className="flex flex-col sm:flex-row gap-4">
+              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4">
                 <FancyButton asChild size="lg" variant="primary">
                   <Link href="/membership">
                     Become a Member
@@ -62,7 +49,7 @@ export default function HomePage() {
               </motion.div>
             </div>
 
-            <motion.div variants={fadeUpVariants} className="relative">
+            <motion.div variants={fadeUp} className="relative">
               <div className="relative p-8 rounded-3xl glass border border-white/10">
                 <Image
                   src="/sri-logo.svg"
@@ -80,13 +67,7 @@ export default function HomePage() {
 
       {/* What We Do Section */}
       <Section kicker="Our Mission" title="What We Do" className="bg-primary-900/30">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeUpVariants}
-          className="max-w-4xl mx-auto"
-        >
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="max-w-4xl mx-auto">
           <motion.div
             className="text-center mb-8"
             whileHover={{ scale: 1.05 }}
@@ -109,24 +90,24 @@ export default function HomePage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={staggerContainer}
+          variants={staggerChildren()}
           className="grid md:grid-cols-3 gap-8"
         >
-          <motion.div variants={fadeUpVariants}>
+          <motion.div variants={fadeUp}>
             <CardFeature
               icon={Target}
               title="Create Opportunities"
               description="We work tirelessly to establish new research positions and funding opportunities for undergraduate students across all disciplines."
             />
           </motion.div>
-          <motion.div variants={fadeUpVariants}>
+          <motion.div variants={fadeUp}>
             <CardFeature
               icon={Users}
               title="Connect Students & Labs"
               description="Our networking events and database bridge the gap between motivated students and research labs seeking talented undergraduates."
             />
           </motion.div>
-          <motion.div variants={fadeUpVariants}>
+          <motion.div variants={fadeUp}>
             <CardFeature
               icon={GraduationCap}
               title="Teach Research Skills"
@@ -138,7 +119,7 @@ export default function HomePage() {
 
       {/* Upcoming Events Section */}
       <Section kicker="What's Next" title="Upcoming Events" className="bg-primary-900/30" centered>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUpVariants}>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
           <EmptyState
             icon={Calendar}
             title="Events Coming Soon"

@@ -150,10 +150,10 @@ function TabPill({
     <button
       onClick={onClick}
       className={[
-        "px-4 py-2 rounded-full text-sm border transition-colors whitespace-nowrap",
+        "px-4 py-2 rounded-full text-sm border transition-all duration-300 ease-out whitespace-nowrap",
         active
-          ? "bg-primary-700/60 text-white border-white/15"
-          : "bg-primary-700/30 text-neutral-200 hover:bg-primary-700/40 border-white/10",
+          ? "bg-accent/30 text-white border-accent/40 shadow-[0_16px_36px_-24px_rgba(59,167,255,0.5)]"
+          : "bg-primary-700/30 text-neutral-200/90 hover:-translate-y-0.5 hover:bg-primary-700/40 hover:text-white border-white/12",
       ].join(" ")}
     >
       {children}
@@ -171,7 +171,7 @@ function InfoCard({
   children?: React.ReactNode
 }) {
   return (
-    <Card className="bg-primary-700/40 border-white/10 rounded-2xl h-full">
+    <Card className="surface-soft rounded-2xl h-full transition-all duration-[420ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_68px_-34px_rgba(59,167,255,0.45)]">
       <CardHeader>
         <CardTitle className="text-white">{title}</CardTitle>
       </CardHeader>

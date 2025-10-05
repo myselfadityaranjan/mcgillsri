@@ -7,23 +7,13 @@ import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Calendar, FileText, MessageSquare } from "lucide-react"
-
-const fade = {
-  hidden: { opacity: 0, y: 18 },
-  show:   { opacity: 1, y: 0 },
-}
+import { fadeUp, staggerChildren } from "@/lib/motion"
 
 export default function EventsLandingPage() {
   return (
     <>
       <Section className="pt-20 lg:pt-28">
-        <motion.div
-          variants={fade}
-          initial="hidden"
-          animate="show"
-          transition={{ duration: 0.3 }}
-          className="text-center max-w-3xl mx-auto"
-        >
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mx-auto max-w-3xl text-center">
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-4">Programming</p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6">Events</h1>
           <p className="text-neutral-200 text-lg">
@@ -34,8 +24,15 @@ export default function EventsLandingPage() {
       </Section>
 
       <Section className="pt-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          <Card className="bg-primary-700/40 border-white/10 rounded-2xl">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerChildren()}
+          className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3"
+        >
+          <motion.div variants={fadeUp}>
+            <Card className="surface-soft h-full">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-accent" />
@@ -48,9 +45,11 @@ export default function EventsLandingPage() {
                 <FancyButton asChild><Link href="/events/how-to-get-a-research-position">View details</Link></FancyButton>
               </div>
             </CardContent>
-          </Card>
+            </Card>
+          </motion.div>
 
-          <Card className="bg-primary-700/40 border-white/10 rounded-2xl">
+          <motion.div variants={fadeUp}>
+            <Card className="surface-soft h-full">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <FileText className="h-5 w-5 text-accent" />
@@ -63,9 +62,11 @@ export default function EventsLandingPage() {
                 <FancyButton asChild><Link href="/events/cv-editing-drop-in">View details</Link></FancyButton>
               </div>
             </CardContent>
-          </Card>
+            </Card>
+          </motion.div>
 
-          <Card className="bg-primary-700/40 border-white/10 rounded-2xl">
+          <motion.div variants={fadeUp}>
+            <Card className="surface-soft h-full">
             <CardHeader>
               <CardTitle className="text-white flex items-center gap-2">
                 <MessageSquare className="h-5 w-5 text-accent" />
@@ -78,8 +79,9 @@ export default function EventsLandingPage() {
                 <FancyButton asChild><Link href="/events/mock-interviews">View details</Link></FancyButton>
               </div>
             </CardContent>
-          </Card>
-        </div>
+            </Card>
+          </motion.div>
+        </motion.div>
       </Section>
     </>
   )

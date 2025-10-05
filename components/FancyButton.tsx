@@ -8,15 +8,15 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const fancyButtonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all duration-200 focus-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] focus-ring disabled:pointer-events-none disabled:opacity-60",
   {
     variants: {
       variant: {
         primary:
-          "bg-accent text-white hover:bg-accent/90 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-accent/20",
+          "bg-gradient-to-r from-accent to-accent/80 text-white shadow-[0_15px_35px_-18px_rgba(59,167,255,0.65)] hover:-translate-y-0.5 hover:shadow-[0_20px_45px_-20px_rgba(59,167,255,0.75)] active:translate-y-0 backdrop-blur",
         secondary:
-          "border border-white/30 text-white bg-primary-700/80 hover:bg-primary-700 hover:scale-[1.02] active:scale-[0.98] backdrop-blur-sm",
-        ghost: "text-white hover:bg-white/20 hover:text-white",
+          "border border-white/20 text-white bg-primary-700/70 hover:bg-primary-700/80 hover:-translate-y-0.5 active:translate-y-0 shadow-[0_12px_28px_-20px_rgba(8,19,39,0.9)] backdrop-blur",
+        ghost: "text-white/80 hover:text-white hover:bg-white/10 hover:-translate-y-0.5 active:translate-y-0",
       },
       size: {
         sm: "h-9 px-4 py-2",

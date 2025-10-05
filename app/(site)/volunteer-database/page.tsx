@@ -10,20 +10,7 @@ import { EmptyState } from "@/components/EmptyState"
 import { MarkdownProse } from "@/components/MarkdownProse"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { CONTENT } from "@/lib/constants"
-
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-}
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
+import { fadeUp, staggerChildren } from "@/lib/motion"
 
 export default function VolunteerDatabasePage() {
   const [showMembersOnlyModal, setShowMembersOnlyModal] = useState(false)
@@ -32,12 +19,7 @@ export default function VolunteerDatabasePage() {
     <div className="relative">
       {/* Hero Section */}
       <Section className="pt-20 pb-16 lg:pt-32 lg:pb-24">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUpVariants}
-          className="text-center max-w-4xl mx-auto"
-        >
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 border border-accent/30 text-accent text-sm font-medium mb-6">
             <Database className="h-4 w-4" />
             Members Only
@@ -59,7 +41,7 @@ export default function VolunteerDatabasePage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeUpVariants}
+          variants={fadeUp}
           className="max-w-4xl mx-auto"
         >
           <div className="p-8 rounded-2xl glass border border-white/10 mb-12">
@@ -74,11 +56,11 @@ export default function VolunteerDatabasePage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={staggerContainer}
+          variants={staggerChildren()}
           className="max-w-2xl mx-auto"
         >
           <div className="grid md:grid-cols-2 gap-6">
-            <motion.div variants={fadeUpVariants}>
+            <motion.div variants={fadeUp}>
               <FancyButton asChild size="lg" variant="primary" className="w-full h-auto p-6">
                 <Link href="/membership" className="flex flex-col items-center gap-3">
                   <Users className="h-8 w-8" />
@@ -91,7 +73,7 @@ export default function VolunteerDatabasePage() {
               </FancyButton>
             </motion.div>
 
-            <motion.div variants={fadeUpVariants}>
+            <motion.div variants={fadeUp}>
               <Dialog open={showMembersOnlyModal} onOpenChange={setShowMembersOnlyModal}>
                 <DialogTrigger asChild>
                   <FancyButton size="lg" variant="secondary" className="w-full h-auto p-6">
@@ -142,7 +124,7 @@ export default function VolunteerDatabasePage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeUpVariants}
+          variants={fadeUp}
           className="max-w-4xl mx-auto"
         >
           <h2 className="text-3xl md:text-4xl font-semibold text-white mb-8 text-center">

@@ -1,11 +1,13 @@
 "use client"
 
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import ResourcesNav from "@/components/ResourcesNav"
 import { Card, CardContent } from "@/components/ui/card"
 import { PlayCircle } from "lucide-react"
+import { fadeUp, staggerChildren } from "@/lib/motion"
 
 const topics = [
   "Emailing Tips",
@@ -20,7 +22,7 @@ export default function YouTubeSeriesPage() {
   return (
     <>
       <Section className="pt-20 lg:pt-28">
-        <div className="max-w-5xl mx-auto">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mx-auto max-w-5xl">
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">Video Series</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
             SRI YouTube Series: How to Get a Research Position
@@ -38,25 +40,33 @@ export default function YouTubeSeriesPage() {
               </Link>
             </FancyButton>
           </div>
-        </div>
+        </motion.div>
       </Section>
 
       <Section className="pt-6">
-        <div className="max-w-5xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {topics.map((t, i) => (
-            <Card key={i} className="bg-primary-700/40 border-white/10 rounded-2xl overflow-hidden">
-              <CardContent className="p-5">
-                <div className="flex items-start gap-3">
-                  <PlayCircle className="h-6 w-6 text-accent mt-1" />
-                  <div>
-                    <p className="text-white font-medium">{t}</p>
-                    <p className="text-neutral-300 text-sm">Watch on our channel</p>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerChildren(0.08, 0.08)}
+          className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 md:grid-cols-3"
+        >
+          {topics.map((topic) => (
+            <motion.div key={topic} variants={fadeUp}>
+              <Card className="surface-soft overflow-hidden">
+                <CardContent className="p-5">
+                  <div className="flex items-start gap-3">
+                    <PlayCircle className="mt-1 h-6 w-6 text-accent" />
+                    <div>
+                      <p className="text-white font-medium">{topic}</p>
+                      <p className="text-neutral-300 text-sm">Watch on our channel</p>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </Section>
     </>
   )

@@ -6,11 +6,7 @@ import { UserPlus, Clock, Star, ArrowLeft, CheckCircle } from "lucide-react"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import NewsletterSignup from "@/components/NewsletterSignup"
-
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-}
+import { fadeUp, staggerChildren } from "@/lib/motion"
 
 const benefits = [
   "Access to exclusive volunteer database",
@@ -26,12 +22,7 @@ export default function MembershipPage() {
     <div className="relative">
       {/* Hero Section */}
       <Section className="pt-20 pb-16 lg:pt-32 lg:pb-24">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUpVariants}
-          className="text-center max-w-4xl mx-auto"
-        >
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 border border-accent/30 text-accent text-sm font-medium mb-6">
             <Clock className="h-4 w-4" />
             Coming Soon
@@ -59,7 +50,7 @@ export default function MembershipPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeUpVariants}
+          variants={fadeUp}
           className="max-w-4xl mx-auto"
         >
           <div className="text-center mb-12">
@@ -69,21 +60,24 @@ export default function MembershipPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {benefits.map((benefit, index) => (
+          <motion.div
+            variants={staggerChildren(0.1, 0.1)}
+            className="grid gap-6 md:grid-cols-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {benefits.map((benefit) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex items-start gap-3 p-4 rounded-xl glass border border-white/10"
+                key={benefit}
+                variants={fadeUp}
+                className="flex items-start gap-3 rounded-xl surface-soft p-4"
               >
-                <CheckCircle className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
+                <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-accent" />
                 <span className="text-neutral-200">{benefit}</span>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       </Section>
 
@@ -93,10 +87,10 @@ export default function MembershipPage() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeUpVariants}
+          variants={fadeUp}
           className="max-w-3xl mx-auto text-center"
         >
-          <div className="p-8 rounded-2xl glass border border-white/10">
+          <div className="p-8 rounded-2xl surface-soft">
             <div className="p-4 rounded-2xl bg-accent/10 border border-accent/20 w-fit mx-auto mb-6">
               <Star className="h-8 w-8 text-accent" />
             </div>

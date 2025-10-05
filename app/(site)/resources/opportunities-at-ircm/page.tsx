@@ -1,17 +1,19 @@
 "use client"
 
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import ResourcesNav from "@/components/ResourcesNav"
 import { Card, CardContent } from "@/components/ui/card"
 import { FileText, ExternalLink } from "lucide-react"
+import { fadeUp } from "@/lib/motion"
 
 export default function OpportunitiesIRCMPage() {
   return (
     <>
       <Section className="pt-20 lg:pt-28">
-        <div className="max-w-6xl mx-auto">
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mx-auto max-w-6xl">
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">Institutes & Labs</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">Opportunities at IRCM</h1>
           <ResourcesNav />
@@ -33,20 +35,20 @@ export default function OpportunitiesIRCMPage() {
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <FancyButton asChild>
                   <Link href="#" target="_blank" rel="noopener noreferrer">
-                    IRCM Announcements <ExternalLink className="h-4 w-4 ml-1" />
+                    IRCM Announcements <ExternalLink className="ml-1 h-4 w-4" />
                   </Link>
                 </FancyButton>
                 <FancyButton asChild variant="secondary">
                   <Link href="#" target="_blank" rel="noopener noreferrer">
-                    IRCM Website <ExternalLink className="h-4 w-4 ml-1" />
+                    IRCM Website <ExternalLink className="ml-1 h-4 w-4" />
                   </Link>
                 </FancyButton>
               </div>
             </div>
 
             <div className="md:sticky md:top-24">
-              <Card className="bg-primary-700/40 border-white/10 rounded-2xl">
-                <CardContent className="p-6">
+              <Card className="surface-soft">
+                <CardContent className="space-y-4 p-6">
                   <div className="flex items-start gap-3">
                     <FileText className="h-6 w-6 text-accent shrink-0 mt-1" />
                     <div>
@@ -65,7 +67,7 @@ export default function OpportunitiesIRCMPage() {
               </Card>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Section>
     </>
   )

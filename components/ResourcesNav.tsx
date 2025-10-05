@@ -19,8 +19,8 @@ export default function ResourcesNav({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "mt-6 rounded-2xl border border-white/10 bg-primary-900/40 p-2",
-        "overflow-x-auto no-scrollbar",
+        "mt-6 rounded-2xl surface-soft p-2",
+        "overflow-x-auto no-scrollbar transition-all duration-500 ease-out",
         className
       )}
     >
@@ -32,11 +32,11 @@ export default function ResourcesNav({ className }: { className?: string }) {
               key={link.href}
               href={link.href}
               className={cn(
-                "px-4 py-2 rounded-full text-sm transition-colors border",
+                "px-4 py-2 rounded-full text-sm border transition-all duration-300 ease-out",
                 "whitespace-nowrap",
                 active
-                  ? "bg-primary-700/60 text-white border-white/15"
-                  : "bg-primary-700/30 text-neutral-200 hover:bg-primary-700/40 border-white/10"
+                  ? "bg-accent/30 text-white border-accent/40 shadow-[0_16px_36px_-24px_rgba(59,167,255,0.5)]"
+                  : "bg-primary-700/30 text-neutral-200/90 hover:-translate-y-0.5 hover:bg-primary-700/40 hover:text-white border-white/12"
               )}
             >
               {link.label}

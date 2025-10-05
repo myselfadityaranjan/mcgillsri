@@ -1,16 +1,23 @@
 "use client"
 
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import ResourcesNav from "@/components/ResourcesNav"
 import { Card, CardContent } from "@/components/ui/card"
+import { fadeUp, staggerChildren } from "@/lib/motion"
 
 export default function SRIStudentshipAwardPage() {
   return (
     <>
       <Section className="pt-20 lg:pt-28">
-        <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          className="mx-auto max-w-5xl"
+        >
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">Funding</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-2">SRI Studentship Award</h1>
           <ResourcesNav />
@@ -20,51 +27,68 @@ export default function SRIStudentshipAwardPage() {
             Each year, we sponsor a student researcher under the SRI Award over the summer, allowing the student to
             gain research experience while decreasing the financial burden on the supervisor.
           </p>
-        </div>
+        </motion.div>
       </Section>
 
       <Section className="pt-6">
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6">
-          <Card className="bg-primary-700/40 border-white/10 rounded-2xl">
-            <CardContent className="p-6">
-              <h3 className="text-white font-semibold mb-2">Eligibility</h3>
-              <p className="text-neutral-200">
-                To be eligible for the award, you must be an undergraduate student currently registered at McGill
-                University. After you find a research position, either in academia or in industry, your supervisor
-                must sign your application. We have no restrictions in terms of program or year of study, meaning the
-                $1000 SRI Award is open to engineering or arts research in addition to science.
-              </p>
-            </CardContent>
-          </Card>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerChildren()}
+          className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2"
+        >
+          <motion.div variants={fadeUp}>
+            <Card className="surface-soft">
+              <CardContent className="space-y-4 p-6">
+                <h3 className="text-white font-semibold">Eligibility</h3>
+                <p className="text-neutral-200">
+                  To be eligible for the award, you must be an undergraduate student currently registered at McGill
+                  University. After you find a research position, either in academia or in industry, your supervisor
+                  must sign your application. We have no restrictions in terms of program or year of study, meaning the
+                  $1000 SRI Award is open to engineering or arts research in addition to science.
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-          <Card className="bg-primary-700/40 border-white/10 rounded-2xl">
-            <CardContent className="p-6">
-              <h3 className="text-white font-semibold mb-2">Selection Criteria</h3>
-              <p className="text-neutral-200">
-                Our selection criteria are not based on grades or research experience. Instead, we will look at your
-                passion for research as indicated in your personal statement. The application and contents of the
-                personal statement will be released soon.
-              </p>
-            </CardContent>
-          </Card>
+          <motion.div variants={fadeUp}>
+            <Card className="surface-soft">
+              <CardContent className="space-y-4 p-6">
+                <h3 className="text-white font-semibold">Selection Criteria</h3>
+                <p className="text-neutral-200">
+                  Our selection criteria are not based on grades or research experience. Instead, we will look at your
+                  passion for research as indicated in your personal statement. The application and contents of the
+                  personal statement will be released soon.
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
 
-          <Card className="bg-primary-700/40 border-white/10 rounded-2xl md:col-span-2">
-            <CardContent className="p-6">
-              <h3 className="text-white font-semibold mb-2">Application</h3>
-              <p className="text-neutral-200">
-                The application for the 2024 SRI Award is now open. Please check the application form for more details.
-              </p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <FancyButton asChild>
-                  <Link href="#" target="_blank" rel="noopener noreferrer">Application</Link>
-                </FancyButton>
-                <FancyButton asChild variant="secondary">
-                  <Link href="#" target="_blank" rel="noopener noreferrer">Past Winners</Link>
-                </FancyButton>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+          <motion.div variants={fadeUp} className="md:col-span-2">
+            <Card className="surface-soft">
+              <CardContent className="space-y-4 p-6">
+                <h3 className="text-white font-semibold">Application</h3>
+                <p className="text-neutral-200">
+                  The application for the 2024 SRI Award is now open. Please check the application form for more
+                  details.
+                </p>
+                <div className="mt-1 flex flex-wrap gap-3">
+                  <FancyButton asChild>
+                    <Link href="#" target="_blank" rel="noopener noreferrer">
+                      Application
+                    </Link>
+                  </FancyButton>
+                  <FancyButton asChild variant="secondary">
+                    <Link href="#" target="_blank" rel="noopener noreferrer">
+                      Past Winners
+                    </Link>
+                  </FancyButton>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </motion.div>
       </Section>
     </>
   )
