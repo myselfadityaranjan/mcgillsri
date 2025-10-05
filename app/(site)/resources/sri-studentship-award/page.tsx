@@ -1,9 +1,9 @@
-// app/(site)/resources/sri-studentship-award/page.tsx
 "use client"
 
 import Link from "next/link"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
+import ResourcesNav from "@/components/ResourcesNav"
 import { Card, CardContent } from "@/components/ui/card"
 
 export default function SRIStudentshipAwardPage() {
@@ -13,7 +13,8 @@ export default function SRIStudentshipAwardPage() {
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">Funding</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-2">SRI Studentship Award</h1>
-          <p className="text-neutral-300 text-lg">($1000)</p>
+          <ResourcesNav />
+          <p className="text-neutral-300 text-lg mt-4">($1000)</p>
           <p className="text-neutral-200 mt-4">
             One of the main goals of the Student Research Initiative is to help students become involved in research.
             Each year, we sponsor a student researcher under the SRI Award over the summer, allowing the student to

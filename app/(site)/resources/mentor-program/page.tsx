@@ -1,9 +1,9 @@
-// app/(site)/resources/mentor-program/page.tsx
 "use client"
 
 import Link from "next/link"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
+import ResourcesNav from "@/components/ResourcesNav"
 import { Card, CardContent } from "@/components/ui/card"
 
 export default function MentorProgramPage() {
@@ -13,7 +13,8 @@ export default function MentorProgramPage() {
         <div className="max-w-5xl mx-auto">
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">Mentorship</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">SRI Mentor Program</h1>
-          <p className="text-neutral-200 text-lg">
+          <ResourcesNav />
+          <p className="text-neutral-200 text-lg mt-4">
             The mentor program connects McGill undergrads with senior students or graduate mentors to understand what
             research is really like and how to break in.
           </p>

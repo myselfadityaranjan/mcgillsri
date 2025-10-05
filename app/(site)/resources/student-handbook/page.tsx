@@ -1,9 +1,9 @@
-// app/(site)/resources/student-handbook/page.tsx
 "use client"
 
 import Link from "next/link"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
+import ResourcesNav from "@/components/ResourcesNav"
 import { Card, CardContent } from "@/components/ui/card"
 
 export default function StudentHandbookPage() {
@@ -13,7 +13,8 @@ export default function StudentHandbookPage() {
         <div className="max-w-4xl mx-auto">
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">Guides</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">SRI Student Handbook</h1>
-          <p className="text-neutral-200 text-lg">
+          <ResourcesNav />
+          <p className="text-neutral-200 text-lg mt-4">
             A concise handbook for getting started in research—policies, best practices, and practical steps.
           </p>
         </div>

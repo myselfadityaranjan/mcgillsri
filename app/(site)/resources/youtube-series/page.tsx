@@ -1,9 +1,9 @@
-// app/(site)/resources/youtube-series/page.tsx
 "use client"
 
 import Link from "next/link"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
+import ResourcesNav from "@/components/ResourcesNav"
 import { Card, CardContent } from "@/components/ui/card"
 import { PlayCircle } from "lucide-react"
 
@@ -25,8 +25,8 @@ export default function YouTubeSeriesPage() {
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">
             SRI YouTube Series: How to Get a Research Position
           </h1>
-
-          <p className="text-neutral-200">
+          <ResourcesNav />
+          <p className="text-neutral-200 mt-4">
             SRI invites a group of brilliant researchers to share practical tips and opportunities for getting
             involved in research.
           </p>
