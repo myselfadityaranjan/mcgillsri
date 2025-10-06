@@ -1,4 +1,4 @@
-import { Role, type Profile } from "@prisma/client"
+import type { Role, Profile } from "@prisma/client"
 import { Building2, GraduationCap, Mail, MapPin } from "lucide-react"
 import Link from "next/link"
 

@@ -1,7 +1,6 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Visibility } from "@prisma/client"
 import Image from "next/image"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -15,6 +14,7 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { profileSchema, type ProfileInput } from "@/lib/schemas/network"
 import { toast } from "@/hooks/use-toast"
+import { VISIBILITY_DEFAULT, VISIBILITY_OPTIONS, type VisibilityOption } from "@/lib/types/network"
 
 interface ProfileEditorProps {
   defaultValues?: ProfileInput & {
@@ -37,7 +37,7 @@ export function ProfileEditor({ defaultValues }: ProfileEditorProps) {
       links: defaultValues?.links ?? [],
       avatarUrl: defaultValues?.avatarUrl,
       cvUrl: defaultValues?.cvUrl,
-      visibility: defaultValues?.visibility ?? Visibility.AUTHENTICATED,
+      visibility: (defaultValues?.visibility as VisibilityOption | undefined) ?? VISIBILITY_DEFAULT,
     },
   })
 
@@ -281,16 +281,18 @@ export function ProfileEditor({ defaultValues }: ProfileEditorProps) {
 
           <Field label="Visibility">
             <Select
-              value={form.watch("visibility") ?? Visibility.AUTHENTICATED}
-              onValueChange={(value: Visibility) => form.setValue("visibility", value)}
+              value={(form.watch("visibility") as VisibilityOption | undefined) ?? VISIBILITY_DEFAULT}
+              onValueChange={(value: VisibilityOption) => form.setValue("visibility", value)}
             >
               <SelectTrigger className="bg-white/10 text-white">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-[var(--net-bg)] text-white">
-                <SelectItem value={Visibility.PUBLIC}>Public (all network members)</SelectItem>
-                <SelectItem value={Visibility.AUTHENTICATED}>Authenticated students & faculty</SelectItem>
-                <SelectItem value={Visibility.PROFESSORS_ONLY}>Faculty + Admin only</SelectItem>
+                {VISIBILITY_OPTIONS.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </Field>
