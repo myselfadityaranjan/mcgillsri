@@ -42,6 +42,11 @@ export const NAV_ITEMS = [
     href: "/membership",
     icon: "UserPlus",
   },
+  {
+    title: "Network",
+    href: "/network",
+    icon: "UsersRound",
+  },
 ] as const
 
 // Verbatim content blocks - DO NOT EDIT

@@ -1,6 +1,9 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+
+import { Providers } from "@/components/Providers"
+
 import "./globals.css"
 
 const inter = Inter({
@@ -66,7 +69,9 @@ export default function RootLayout({
         <meta name="theme-color" content="#0B1F3B" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
-      <body className="font-sans text-neutral-100 overflow-x-hidden">{children}</body>
+      <body className="font-sans text-neutral-100 overflow-x-hidden">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }
