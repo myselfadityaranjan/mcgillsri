@@ -1,5 +1,7 @@
-import { Role, Visibility } from "@prisma/client"
 import { z } from "zod"
+
+const visibilityEnum = z.enum(["PUBLIC", "AUTHENTICATED", "PROFESSORS_ONLY"] as const)
+const roleEnum = z.enum(["STUDENT", "PROFESSOR", "ADMIN"] as const)
 
 export const linkSchema = z.string().url({ message: "Invalid URL" }).max(300)
 
@@ -14,7 +16,7 @@ export const profileSchema = z.object({
   links: z.array(linkSchema).max(10).optional(),
   avatarUrl: z.string().url().optional(),
   cvUrl: z.string().url().optional(),
-  visibility: z.nativeEnum(Visibility).optional(),
+  visibility: visibilityEnum.optional(),
 })
 
 export const profileMutationSchema = profileSchema.transform((data) => {
@@ -87,5 +89,8 @@ export type JobMutationInput = z.infer<typeof jobMutationSchema>
 export type JobFilters = z.infer<typeof jobFiltersSchema>
 
 export const roleGuardSchema = z.object({
-  role: z.nativeEnum(Role),
+  role: roleEnum,
 })
+
+export type VisibilityOption = z.infer<typeof visibilityEnum>
+export type RoleOption = z.infer<typeof roleEnum>

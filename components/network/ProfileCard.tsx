@@ -1,20 +1,12 @@
-import type { Role, Profile } from "@prisma/client"
 import { Building2, GraduationCap, Mail, MapPin } from "lucide-react"
 import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
 import { NetworkCard } from "@/components/network/NetworkCard"
+import type { NetworkProfile } from "@/lib/types/network"
 
-export type ProfileWithUser = Profile & {
-  user: {
-    name: string | null
-    email: string
-    role: Role
-  }
-}
-
-interface ProfileCardProps {
-  profile: ProfileWithUser
+export interface ProfileCardProps {
+  profile: NetworkProfile
 }
 
 export function ProfileCard({ profile }: ProfileCardProps) {

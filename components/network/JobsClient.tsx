@@ -4,13 +4,14 @@ import { useMemo, useState } from "react"
 import useSWR from "swr"
 import { Button } from "@/components/ui/button"
 import { SearchFilterBar } from "@/components/network/SearchFilterBar"
-import { JobCard, type JobWithAuthor } from "@/components/network/JobCard"
+import { JobCard } from "@/components/network/JobCard"
 import { AnimatedList } from "@/components/network/AnimatedList"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
+import type { NetworkJob } from "@/lib/types/network"
 
 interface JobsClientProps {
-  initialJobs: JobWithAuthor[]
+  initialJobs: NetworkJob[]
   initialTotal: number
   pageSize: number
   canManage?: boolean
@@ -28,7 +29,7 @@ const fetcher = async (url: string) => {
   const response = await fetch(url, { cache: "no-store" })
   const json = await response.json()
   if (!response.ok) throw new Error(json.error?.message ?? "Unable to fetch jobs")
-  return json.data as { jobs: JobWithAuthor[]; pagination: { total: number; pages: number; page: number } }
+  return json.data as { jobs: NetworkJob[]; pagination: { total: number; pages: number; page: number } }
 }
 
 export function JobsClient({ initialJobs, initialTotal, pageSize, canManage }: JobsClientProps) {
@@ -45,7 +46,7 @@ export function JobsClient({ initialJobs, initialTotal, pageSize, canManage }: J
     return `/api/network/jobs?${params.toString()}`
   }, [filters, pageSize])
 
-  const { data, isValidating, error, mutate } = useSWR(queryKey, fetcher, {
+  const { data, isValidating, error } = useSWR(queryKey, fetcher, {
     keepPreviousData: true,
     fallbackData: {
       jobs: initialJobs,

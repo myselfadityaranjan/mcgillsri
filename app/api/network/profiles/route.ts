@@ -5,6 +5,7 @@ import { Visibility, Role, Prisma } from "@prisma/client"
 import prisma from "@/lib/db"
 import { getServerAuthSession } from "@/lib/auth"
 import { profileFiltersSchema } from "@/lib/schemas/network"
+import type { NetworkProfile } from "@/lib/types/network"
 
 function error(message: string, status = 400, code = "BAD_REQUEST") {
   return NextResponse.json({ ok: false, error: { code, message } }, { status })
@@ -90,10 +91,31 @@ export async function GET(req: NextRequest) {
     prisma.profile.count({ where }),
   ])
 
+  const profilesPayload: NetworkProfile[] = profiles.map((profile) => ({
+    id: profile.id,
+    program: profile.program,
+    yearOfStudy: profile.yearOfStudy,
+    gpa: profile.gpa,
+    interests: profile.interests ?? [],
+    skills: profile.skills ?? [],
+    availability: profile.availability,
+    bio: profile.bio,
+    links: profile.links ?? [],
+    avatarUrl: profile.avatarUrl,
+    cvUrl: profile.cvUrl,
+    visibility: profile.visibility as NetworkProfile["visibility"],
+    updatedAtISO: profile.updatedAt.toISOString(),
+    user: {
+      name: profile.user.name,
+      email: profile.user.email,
+      role: profile.user.role as NetworkProfile["user"]["role"],
+    },
+  }))
+
   return NextResponse.json({
     ok: true,
     data: {
-      profiles,
+      profiles: profilesPayload,
       pagination: {
         total,
         page: filters.page,

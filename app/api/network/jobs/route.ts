@@ -7,6 +7,7 @@ import { getServerAuthSession } from "@/lib/auth"
 import { jobFiltersSchema, jobMutationSchema } from "@/lib/schemas/network"
 import { assertRole } from "@/lib/rbac"
 import { rateLimit, getRateLimitIdentifier } from "@/lib/rate-limit"
+import type { NetworkJob } from "@/lib/types/network"
 
 function error(message: string, status = 400, code = "BAD_REQUEST") {
   return NextResponse.json({ ok: false, error: { code, message } }, { status })
@@ -78,10 +79,12 @@ export async function GET(req: NextRequest) {
     prisma.job.count({ where }),
   ])
 
+  const jobsPayload = jobs.map(mapJob)
+
   return NextResponse.json({
     ok: true,
     data: {
-      jobs,
+      jobs: jobsPayload,
       pagination: {
         total,
         page: filters.page,
@@ -139,5 +142,24 @@ export async function POST(req: NextRequest) {
     },
   })
 
-  return NextResponse.json({ ok: true, data: job }, { status: 201 })
+  return NextResponse.json({ ok: true, data: mapJob(job) }, { status: 201 })
 }
+const mapJob = (job: any): NetworkJob => ({
+  id: job.id,
+  title: job.title,
+  lab: job.lab,
+  department: job.department,
+  description: job.description,
+  tags: job.tags ?? [],
+  location: job.location,
+  commitment: job.commitment,
+  paid: job.paid,
+  applicationUrl: job.applicationUrl,
+  contactEmail: job.contactEmail,
+  createdAtISO: job.createdAt instanceof Date ? job.createdAt.toISOString() : job.createdAt,
+  postedBy: {
+    name: job.postedBy?.name,
+    email: job.postedBy?.email,
+    role: job.postedBy?.role as NetworkJob["postedBy"]["role"],
+  },
+})

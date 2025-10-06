@@ -6,14 +6,15 @@ import { ChevronRight } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { SearchFilterBar } from "@/components/network/SearchFilterBar"
-import { ProfileCard, type ProfileWithUser } from "@/components/network/ProfileCard"
+import { ProfileCard } from "@/components/network/ProfileCard"
 import { AnimatedList } from "@/components/network/AnimatedList"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import type { NetworkProfile } from "@/lib/types/network"
 
 interface DirectoryClientProps {
-  initialProfiles: ProfileWithUser[]
+  initialProfiles: NetworkProfile[]
   initialTotal: number
   pageSize: number
   role: string
@@ -34,7 +35,7 @@ const fetcher = async (url: string) => {
   if (!response.ok) {
     throw new Error(json.error?.message ?? "Unable to load directory")
   }
-  return json.data as { profiles: ProfileWithUser[]; pagination: { total: number; page: number; pages: number } }
+  return json.data as { profiles: NetworkProfile[]; pagination: { total: number; page: number; pages: number } }
 }
 
 export function DirectoryClient({ initialProfiles, initialTotal, pageSize, role }: DirectoryClientProps) {

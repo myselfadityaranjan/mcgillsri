@@ -1,7 +1,6 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import type { Job } from "@prisma/client"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Loader2, Save } from "lucide-react"
@@ -12,12 +11,13 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { jobSchema, type JobInput } from "@/lib/schemas/network"
+import type { NetworkJob } from "@/lib/types/network"
 import { toast } from "@/hooks/use-toast"
 
 interface JobEditorProps {
-  job?: Job
-  onSaved?: (job: Job) => void
-  onDelete?: (job: Job) => void
+  job?: NetworkJob
+  onSaved?: (job: NetworkJob) => void
+  onDelete?: (job: NetworkJob) => void
 }
 
 export function JobEditor({ job, onSaved, onDelete }: JobEditorProps) {
@@ -71,7 +71,8 @@ export function JobEditor({ job, onSaved, onDelete }: JobEditorProps) {
       if (!response.ok) {
         throw new Error(json.error?.message ?? "Failed to save job")
       }
-      onSaved?.(json.data)
+      const jobPayload = json.data as NetworkJob
+      onSaved?.(jobPayload)
       toast({ title: "Job saved", description: "Your posting is live" })
     } catch (error) {
       toast({ title: "Unable to save", description: (error as Error).message })

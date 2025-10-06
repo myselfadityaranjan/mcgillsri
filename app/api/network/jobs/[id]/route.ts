@@ -6,10 +6,31 @@ import prisma from "@/lib/db"
 import { getServerAuthSession } from "@/lib/auth"
 import { jobMutationSchema } from "@/lib/schemas/network"
 import { rateLimit, getRateLimitIdentifier } from "@/lib/rate-limit"
+import type { NetworkJob } from "@/lib/types/network"
 
 function error(message: string, status = 400, code = "BAD_REQUEST") {
   return NextResponse.json({ ok: false, error: { code, message } }, { status })
 }
+
+const mapJob = (job: any): NetworkJob => ({
+  id: job.id,
+  title: job.title,
+  lab: job.lab,
+  department: job.department,
+  description: job.description,
+  tags: job.tags ?? [],
+  location: job.location,
+  commitment: job.commitment,
+  paid: job.paid,
+  applicationUrl: job.applicationUrl,
+  contactEmail: job.contactEmail,
+  createdAtISO: job.createdAt instanceof Date ? job.createdAt.toISOString() : job.createdAt,
+  postedBy: {
+    name: job.postedBy?.name,
+    email: job.postedBy?.email,
+    role: job.postedBy?.role as NetworkJob["postedBy"]["role"],
+  },
+})
 
 export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerAuthSession()
@@ -28,7 +49,7 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
     return error("Job not found", 404, "NOT_FOUND")
   }
 
-  return NextResponse.json({ ok: true, data: job })
+  return NextResponse.json({ ok: true, data: mapJob(job) })
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
@@ -85,7 +106,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     },
   })
 
-  return NextResponse.json({ ok: true, data: updated })
+  return NextResponse.json({ ok: true, data: mapJob(updated) })
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {

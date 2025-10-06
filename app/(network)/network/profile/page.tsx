@@ -2,6 +2,7 @@ import prisma from "@/lib/db"
 import { getServerAuthSession } from "@/lib/auth"
 import { NetworkShell } from "@/components/network/NetworkShell"
 import { ProfileEditor } from "@/components/network/ProfileEditor"
+import type { VisibilityOption } from "@/lib/types/network"
 
 export default async function ProfilePage() {
   const session = await getServerAuthSession()
@@ -25,7 +26,7 @@ export default async function ProfilePage() {
         links: profileData.links ?? [],
         avatarUrl: profileData.avatarUrl ?? undefined,
         cvUrl: profileData.cvUrl ?? undefined,
-        visibility: profileData.visibility,
+        visibility: profileData.visibility as VisibilityOption,
       }
     : undefined
 

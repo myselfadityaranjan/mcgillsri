@@ -1,16 +1,13 @@
-import type { Job, Role, User } from "@prisma/client"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { NetworkCard } from "@/components/network/NetworkCard"
 import { ExternalLink, Mail, MapPin, Timer } from "lucide-react"
 import Link from "next/link"
 
-export type JobWithAuthor = Job & {
-  postedBy: Pick<User, "name" | "email" | "role">
-}
+import type { NetworkJob } from "@/lib/types/network"
 
 interface JobCardProps {
-  job: JobWithAuthor
+  job: NetworkJob
   footer?: React.ReactNode
 }
 

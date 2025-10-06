@@ -4,13 +4,13 @@ import { useEffect, useMemo, useState } from "react"
 import useSWR from "swr"
 
 import { JobEditor } from "@/components/network/JobEditor"
-import { JobCard, type JobWithAuthor } from "@/components/network/JobCard"
+import { JobCard } from "@/components/network/JobCard"
 import { AnimatedList } from "@/components/network/AnimatedList"
 import { Button } from "@/components/ui/button"
-import { toast } from "@/hooks/use-toast"
+import type { NetworkJob } from "@/lib/types/network"
 
 interface AdminJobsClientProps {
-  initialJobs: JobWithAuthor[]
+  initialJobs: NetworkJob[]
   pageSize: number
   role: string
 }
@@ -19,7 +19,7 @@ const fetcher = async (url: string) => {
   const response = await fetch(url, { cache: "no-store" })
   const json = await response.json()
   if (!response.ok) throw new Error(json.error?.message ?? "Unable to fetch jobs")
-  return json.data as { jobs: JobWithAuthor[]; pagination: { page: number; pages: number; total: number } }
+  return json.data as { jobs: NetworkJob[]; pagination: { page: number; pages: number; total: number } }
 }
 
 export function AdminJobsClient({ initialJobs, pageSize, role }: AdminJobsClientProps) {
@@ -36,7 +36,7 @@ export function AdminJobsClient({ initialJobs, pageSize, role }: AdminJobsClient
     },
   })
 
-  const [editingJob, setEditingJob] = useState<JobWithAuthor | null>(null)
+  const [editingJob, setEditingJob] = useState<NetworkJob | null>(null)
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {

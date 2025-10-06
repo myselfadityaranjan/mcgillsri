@@ -4,9 +4,10 @@ import { Visibility, Role } from "@prisma/client"
 
 import prisma from "@/lib/db"
 import { getServerAuthSession } from "@/lib/auth"
-import { profileMutationSchema } from "@/lib/schemas/network"
+import { profileMutationSchema, type VisibilityOption } from "@/lib/schemas/network"
 import { assertRole } from "@/lib/rbac"
 import { rateLimit, getRateLimitIdentifier } from "@/lib/rate-limit"
+import type { NetworkProfile } from "@/lib/types/network"
 
 function ok(data: unknown, init?: number) {
   return NextResponse.json({ ok: true, data }, { status: init ?? 200 })
@@ -24,9 +25,16 @@ export async function GET() {
 
   const profile = await prisma.profile.findUnique({
     where: { userId: session.user.id },
+    include: {
+      user: { select: { id: true, name: true, email: true, role: true } },
+    },
   })
 
-  return ok(profile)
+  if (!profile) {
+    return ok(null)
+  }
+
+  return ok(mapProfile(profile))
 }
 
 export async function POST(req: NextRequest) {
@@ -79,7 +87,7 @@ async function mutate(req: NextRequest) {
       links: data.links ?? [],
       avatarUrl: data.avatarUrl,
       cvUrl: data.cvUrl,
-      visibility: data.visibility ?? Visibility.AUTHENTICATED,
+      visibility: toVisibilityEnum(data.visibility),
     },
     update: {
       program: data.program,
@@ -92,9 +100,35 @@ async function mutate(req: NextRequest) {
       links: data.links ?? [],
       avatarUrl: data.avatarUrl,
       cvUrl: data.cvUrl,
-      visibility: data.visibility ?? Visibility.AUTHENTICATED,
+      visibility: toVisibilityEnum(data.visibility),
+    },
+    include: {
+      user: { select: { id: true, name: true, email: true, role: true } },
     },
   })
 
-  return ok(profile)
+  return ok(mapProfile(profile))
 }
+const toVisibilityEnum = (value?: VisibilityOption) => (value ?? "AUTHENTICATED") as Visibility
+
+const mapProfile = (profile: any): NetworkProfile => ({
+  id: profile.id,
+  program: profile.program,
+  yearOfStudy: profile.yearOfStudy,
+  gpa: profile.gpa,
+  interests: profile.interests ?? [],
+  skills: profile.skills ?? [],
+  availability: profile.availability,
+  bio: profile.bio,
+  links: profile.links ?? [],
+  avatarUrl: profile.avatarUrl,
+  cvUrl: profile.cvUrl,
+  visibility: profile.visibility as NetworkProfile["visibility"],
+  updatedAtISO: profile.updatedAt instanceof Date ? profile.updatedAt.toISOString() : profile.updatedAt,
+  user: {
+    id: profile.user?.id,
+    email: profile.user?.email ?? "",
+    name: profile.user?.name,
+    role: profile.user?.role as NetworkProfile["user"]["role"],
+  },
+})
