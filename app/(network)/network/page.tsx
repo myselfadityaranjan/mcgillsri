@@ -31,10 +31,16 @@ export default async function NetworkLandingPage() {
   const session = await getServerAuthSession()
   const role = session?.user.role
 
-  const stats = await prisma.$transaction([
-    prisma.profile.count(),
-    prisma.job.count(),
-  ])
+  let stats: [number, number] = [0, 0]
+
+  try {
+    stats = await prisma.$transaction([
+      prisma.profile.count(),
+      prisma.job.count(),
+    ])
+  } catch (error) {
+    console.error("Failed to load network stats", error)
+  }
 
   const cards = [...links]
   if (role === "ADMIN" || role === "PROFESSOR") {
@@ -54,11 +60,11 @@ export default async function NetworkLandingPage() {
         <dl className="grid grid-cols-2 gap-6 text-sm text-white/70 sm:grid-cols-4">
           <div>
             <dt>Profiles live</dt>
-            <dd className="text-2xl font-semibold text-white">{stats[0]}</dd>
+            <dd className="text-2xl font-semibold text-white">{stats[0] ?? 0}</dd>
           </div>
           <div>
             <dt>Active postings</dt>
-            <dd className="text-2xl font-semibold text-white">{stats[1]}</dd>
+            <dd className="text-2xl font-semibold text-white">{stats[1] ?? 0}</dd>
           </div>
           <div>
             <dt>Supported roles</dt>
