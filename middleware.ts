@@ -30,7 +30,15 @@ export default withAuth(
   {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-      authorized: ({ token }) => !!token?.role,
+      authorized: ({ token, req }) => {
+        const { pathname } = req.nextUrl
+
+        if (pathname === "/network" || pathname === "/network/") {
+          return true
+        }
+
+        return !!token?.role
+      },
     },
   },
 )
