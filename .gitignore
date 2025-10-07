@@ -2,6 +2,7 @@ node_modules
 .next
 .vercel
 .env.local
+.env
 public/uploads/*
 !public/uploads
 !public/uploads/.gitkeep
