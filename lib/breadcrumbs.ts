@@ -25,7 +25,6 @@ const TITLE_OVERRIDES: Record<string, string> = {
   "/events/cv-editing-drop-in": "CV Editing Drop-in",
   "/events/how-to-get-a-research-position": "How to Get a Research Position",
   "/events/mock-interviews": "Mock Interviews",
-  "/team/hall-of-fame": "Hall of Fame",
   "/team/executive-25-26": "Executive Team 25–26",
 }
 
@@ -76,4 +75,3 @@ export function getBreadcrumbs(pathname: string | null | undefined): Crumb[] {
 
   return crumbs
 }
-

@@ -1,0 +1,11 @@
+node_modules
+.next
+.vercel
+.env.local
+.env
+public/uploads/*
+!public/uploads
+!public/uploads/.gitkeep
+.DS_Store
+coverage
+playwright-report

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { Database, Lock, Users, Search, Filter, ArrowRight } from "lucide-react"
+import { Database, Lock, Users, Search, Filter, ArrowRight, Sparkles, Shield } from "lucide-react"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import { EmptyState } from "@/components/EmptyState"
@@ -18,8 +18,13 @@ export default function VolunteerDatabasePage() {
   return (
     <div className="relative">
       {/* Hero Section */}
-      <Section className="pt-20 pb-16 lg:pt-32 lg:pb-24">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center max-w-4xl mx-auto">
+      <Section className="pt-20 pb-16 lg:pt-32 lg:pb-24 relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-70">
+          <div className="absolute -top-24 left-12 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
+          <div className="absolute top-16 right-12 h-80 w-80 rounded-full bg-emerald-300/12 blur-3xl" />
+          <div className="absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/20 blur-3xl" />
+        </div>
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="relative text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 border border-accent/30 text-accent text-sm font-medium mb-6">
             <Database className="h-4 w-4" />
             Members Only
@@ -36,7 +41,7 @@ export default function VolunteerDatabasePage() {
       </Section>
 
       {/* Main Content */}
-      <Section>
+      <Section className="relative overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -44,14 +49,15 @@ export default function VolunteerDatabasePage() {
           variants={fadeUp}
           className="max-w-4xl mx-auto"
         >
-          <div className="p-8 rounded-2xl glass border border-white/10 mb-12">
+          <div className="p-8 rounded-3xl glass border border-white/10 mb-12 relative overflow-hidden">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/12 via-transparent to-emerald-300/12" />
             <MarkdownProse content={CONTENT.VOLUNTEER_DATABASE} />
           </div>
         </motion.div>
       </Section>
 
       {/* CTA Buttons */}
-      <Section className="bg-primary-900/30">
+      <Section className="bg-primary-900/30 relative overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -119,7 +125,7 @@ export default function VolunteerDatabasePage() {
       </Section>
 
       {/* Preview Section */}
-      <Section>
+      <Section className="relative overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -133,7 +139,8 @@ export default function VolunteerDatabasePage() {
 
           <div className="space-y-6">
             {/* Mock Database Interface */}
-            <div className="p-6 rounded-2xl glass border border-white/10 opacity-60 pointer-events-none">
+            <div className="p-6 rounded-3xl glass border border-white/10 opacity-60 pointer-events-none relative overflow-hidden">
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent/12 via-transparent to-emerald-300/12" />
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-xl font-semibold text-white">Research Opportunities</h3>
                 <div className="flex gap-2">
@@ -171,18 +178,29 @@ export default function VolunteerDatabasePage() {
               </div>
             </div>
 
-            <EmptyState
-              icon={Database}
-              title="Unlock Full Access"
-              description="Once you become a member, you'll see detailed position descriptions, application instructions, and direct contact information for each opportunity."
-            >
-              <FancyButton asChild variant="primary">
-                <Link href="/membership">
-                  Join SRI Today
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </FancyButton>
-            </EmptyState>
+            <div className="rounded-3xl border border-white/10 bg-primary-900/25 p-6 glass text-center">
+              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-accent">
+                <Shield className="h-6 w-6" />
+              </div>
+              <h3 className="text-2xl font-semibold text-white">Unlock Full Access</h3>
+              <p className="mt-2 text-neutral-200">
+                Members see detailed position descriptions, application steps, and direct contact information.
+              </p>
+              <div className="mt-4 flex flex-wrap justify-center gap-3">
+                <FancyButton asChild variant="primary">
+                  <Link href="/membership">
+                    Join SRI Today
+                    <ArrowRight className="h-5 w-5" />
+                  </Link>
+                </FancyButton>
+                <FancyButton asChild variant="secondary" onClick={() => setShowMembersOnlyModal(true)}>
+                  <Link href="#">
+                    See membership benefits
+                    <Sparkles className="h-4 w-4" />
+                  </Link>
+                </FancyButton>
+              </div>
+            </div>
           </div>
         </motion.div>
       </Section>

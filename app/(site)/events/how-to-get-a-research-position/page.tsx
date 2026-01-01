@@ -6,15 +6,12 @@ import { motion } from "framer-motion"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import { Card, CardContent } from "@/components/ui/card"
-import { PlayCircle, ExternalLink } from "lucide-react"
+import { ExternalLink, Sparkles, Wand2 } from "lucide-react"
 import { fadeUp, staggerChildren } from "@/lib/motion"
 
-const videos = Array.from({ length: 8 }).map((_, i) => ({
-  title: `HTGRP Presentation ${i + 1}`,
-  href: "#", // TODO: replace with video URL
-  thumb: "/placeholder.jpg",
-  meta: "00:00",
-}))
+const facebookUrl = "https://www.facebook.com/events/1035688297177151"
+const slidesUrl = "https://drive.google.com/file/d/1VjqKkp064s1Borp0XAhsZsowKEJ0N7cF/view"
+const recordedUrl = "https://drive.google.com/file/d/1WMSXDzVfojTIfvCmA4tMTXc2K_o0rx7-/view"
 
 export default function HTGRPPage() {
   return (
@@ -29,7 +26,7 @@ export default function HTGRPPage() {
 
           <div className="mt-6 flex items-center gap-3">
             <FancyButton asChild>
-              <Link href="#" target="_blank" rel="noopener noreferrer">
+              <Link href={facebookUrl} target="_blank" rel="noopener noreferrer">
                 Facebook Page <ExternalLink className="h-4 w-4 ml-1" />
               </Link>
             </FancyButton>
@@ -50,23 +47,26 @@ export default function HTGRPPage() {
               {
                 title: "Q&A Seminar",
                 body:
-                  "“How to Get a Research Position” is an annual SRI seminar where students share concrete strategies: emailing professors, securing external funding and scholarships, researching abroad, and understanding McGill research-for-credit courses.",
+                  "Annual HTGRP seminar: emailing professors, funding, research-for-credit, and study-abroad strategy with real examples.",
               },
               {
                 title: "For Students, By Students",
                 body:
-                  "Presenters are current/past McGill students active in paid or volunteer research across disciplines. You’ll get curated tips, example emails, and decision frameworks that actually work.",
+                  "Current/past McGill students share what actually worked: curated outreach scripts, timelines, and decision frameworks.",
               },
               {
                 title: "Committed to Quality",
                 body:
-                  "After the talks, join an informal networking session to ask anything, validate your approach, and get tailored advice. Satisfaction guaranteed.",
+                  "Post-talk networking for tailored advice, validation, and next steps. Leave with a plan, not a to-do list.",
               },
             ].map(({ title, body }) => (
               <motion.div key={title} variants={fadeUp}>
-                <Card className="surface-soft h-full">
+                <Card className="surface-soft h-full overflow-hidden">
                   <CardContent className="space-y-4 p-6 text-neutral-200">
-                    <h3 className="text-white font-semibold">{title}</h3>
+                    <div className="flex items-center gap-2">
+                      <Wand2 className="h-5 w-5 text-accent" />
+                      <h3 className="text-white font-semibold">{title}</h3>
+                    </div>
                     <p>{body}</p>
                   </CardContent>
                 </Card>
@@ -74,30 +74,23 @@ export default function HTGRPPage() {
             ))}
           </motion.div>
 
-          <motion.div variants={fadeUp}>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">Past Presentations</h2>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {videos.map((video, index) => (
-                <a
-                  key={`${video.title}-${index}`}
-                  href={video.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block overflow-hidden rounded-2xl surface-soft transition-all duration-300 ease-out hover:-translate-y-1"
-                >
-                  <div className="relative aspect-video">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={video.thumb} alt={video.title} className="h-full w-full object-cover" />
-                    <div className="absolute inset-0 grid place-items-center bg-black/25 transition-all duration-300 ease-out group-hover:bg-black/35">
-                      <PlayCircle className="h-10 w-10 text-white/90" />
-                    </div>
-                  </div>
-                  <div className="p-3">
-                    <p className="text-white font-medium">{video.title}</p>
-                    <p className="text-neutral-400 text-sm">{video.meta}</p>
-                  </div>
-                </a>
-              ))}
+          <motion.div variants={fadeUp} className="flex flex-col gap-4">
+            <h2 className="text-2xl md:text-3xl font-semibold text-white">Past Presentations</h2>
+            <div className="flex flex-wrap gap-3">
+              <FancyButton asChild size="lg">
+                <Link href={slidesUrl} target="_blank" rel="noopener noreferrer">
+                  HTGRP 2025 <ExternalLink className="h-4 w-4 ml-2" />
+                </Link>
+              </FancyButton>
+              <FancyButton asChild size="lg" variant="secondary">
+                <Link href={recordedUrl} target="_blank" rel="noopener noreferrer">
+                  Recorded Version <ExternalLink className="h-4 w-4 ml-2" />
+                </Link>
+              </FancyButton>
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-primary-900/30 px-4 py-3 text-sm text-white/75">
+              <Sparkles className="h-4 w-4 text-accent" />
+              Grab the slides or watch the recording—both are updated for 2025.
             </div>
           </motion.div>
         </motion.div>

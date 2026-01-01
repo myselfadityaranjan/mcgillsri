@@ -8,7 +8,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const fancyButtonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] focus-ring disabled:pointer-events-none disabled:opacity-60",
+  "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] focus-ring disabled:pointer-events-none disabled:opacity-60 after:content-['⟡'] after:ml-1.5 after:text-[0.95em] after:text-accent after:opacity-80 after:drop-shadow-[0_0_12px_rgba(59,167,255,0.35)] after:transition-transform after:duration-300 hover:after:translate-x-0.5",
   {
     variants: {
       variant: {
@@ -22,7 +22,7 @@ const fancyButtonVariants = cva(
         sm: "h-9 px-4 py-2",
         md: "h-11 px-6 py-2.5",
         lg: "h-12 px-8 py-3 text-base",
-        icon: "h-10 w-10",
+        icon: "h-10 w-10 after:content-none after:ml-0",
       },
     },
     defaultVariants: {

@@ -1,0 +1,70 @@
+:root {
+  --net-bg: #0b0b0c;
+  --net-surface: rgba(255, 255, 255, 0.06);
+  --net-border: rgba(255, 255, 255, 0.1);
+  --net-border-strong: rgba(255, 255, 255, 0.18);
+  --net-accent: #c0162c;
+  --net-accent-soft: rgba(192, 22, 44, 0.65);
+  --net-text: #ffffff;
+  --net-text-muted: rgba(255, 255, 255, 0.78);
+  --net-glow: rgba(192, 22, 44, 0.45);
+}
+
+.network-gradient {
+  background: radial-gradient(circle at top left, rgba(192, 22, 44, 0.18), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08), transparent 55%), var(--net-bg);
+}
+
+.network-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--net-border);
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 28px 68px -40px rgba(192, 22, 44, 0.6);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.network-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--net-border-strong);
+  box-shadow: 0 32px 72px -36px rgba(192, 22, 44, 0.7);
+}
+
+.network-surface {
+  background: rgba(12, 12, 12, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px) saturate(150%);
+}
+
+.network-pill {
+  background: rgba(192, 22, 44, 0.15);
+  color: var(--net-text);
+  border: 1px solid rgba(192, 22, 44, 0.4);
+  transition: background 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.network-pill:hover {
+  transform: translateY(-3px);
+  background: rgba(192, 22, 44, 0.3);
+}
+
+.network-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
+}
+
+.network-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.network-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(192, 22, 44, 0.35);
+  border-radius: 999px;
+}
+
+.network-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}

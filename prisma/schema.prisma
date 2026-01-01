@@ -1,0 +1,116 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  STUDENT
+  PROFESSOR
+  ADMIN
+}
+
+enum Visibility {
+  PUBLIC
+  AUTHENTICATED
+  PROFESSORS_ONLY
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  image     String?
+  role      Role      @default(STUDENT)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  accounts  Account[]
+  sessions  Session[]
+  profile   Profile?
+  jobs      Job[]     @relation("UserJobs")
+}
+
+model Profile {
+  id           String     @id @default(cuid())
+  userId       String     @unique
+  user         User       @relation(fields: [userId], references: [id])
+  program      String?
+  yearOfStudy  Int?
+  gpa          Float?
+  interests    String[]
+  skills       String[]
+  availability String?
+  bio          String?
+  links        String[]
+  avatarUrl    String?
+  cvUrl        String?
+  visibility   Visibility @default(AUTHENTICATED)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([createdAt])
+}
+
+model Job {
+  id             String   @id @default(cuid())
+  title          String
+  lab            String?
+  department     String?
+  description    String
+  tags           String[]
+  location       String?
+  commitment     String?
+  paid           Boolean  @default(false)
+  applicationUrl String?
+  contactEmail   String?
+  postedById     String
+  postedBy       User     @relation("UserJobs", fields: [postedById], references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([postedById])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?  @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

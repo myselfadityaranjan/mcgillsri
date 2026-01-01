@@ -13,8 +13,8 @@ export const NAV_ITEMS = [
     icon: "House",
   },
   {
-    title: "FSSN 2023",
-    href: "/fssn-2023",
+    title: "FSSN 2025",
+    href: "/fssn-2025",
     icon: "UsersRound",
   },
   {
@@ -41,6 +41,11 @@ export const NAV_ITEMS = [
     title: "Become a Member",
     href: "/membership",
     icon: "UserPlus",
+  },
+  {
+    title: "Network",
+    href: "/network",
+    icon: "UsersRound",
   },
 ] as const
 

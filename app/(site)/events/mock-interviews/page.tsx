@@ -6,14 +6,20 @@ import { motion } from "framer-motion"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import { Card, CardContent } from "@/components/ui/card"
-import { ExternalLink, Mic, Users, Laptop, ShieldAlert } from "lucide-react"
+import { ExternalLink, Mic, Users, Laptop, ShieldAlert, Sparkles } from "lucide-react"
 import { fadeUp, staggerChildren } from "@/lib/motion"
 
 export default function MockInterviewsPage() {
   return (
     <>
-      <Section className="pt-20 lg:pt-28">
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="mx-auto max-w-4xl">
+      <Section className="pt-20 lg:pt-28 relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-70">
+          <div className="absolute -top-24 left-10 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
+          <div className="absolute top-12 right-12 h-72 w-72 rounded-full bg-emerald-300/12 blur-3xl" />
+          <div className="absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+        </div>
+
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="relative mx-auto max-w-5xl">
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">Practice</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4">SRI Mock Interviews</h1>
           <p className="text-neutral-200 text-lg">
@@ -38,7 +44,7 @@ export default function MockInterviewsPage() {
           className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3"
         >
           <motion.div variants={fadeUp}>
-            <Card className="surface-soft h-full">
+            <Card className="surface-soft h-full overflow-hidden">
               <CardContent className="p-6 text-neutral-200">
                 <h3 className="text-white font-semibold mb-2">What you’ll practice</h3>
                 <ul className="space-y-1 pl-5 list-disc">
@@ -54,17 +60,20 @@ export default function MockInterviewsPage() {
           </motion.div>
 
           <motion.div variants={fadeUp}>
-            <Card className="surface-soft h-full">
-              <CardContent className="p-6 text-neutral-200 space-y-2">
-                <h3 className="text-white font-semibold">Format</h3>
-                <p>
-                  <Mic className="mr-2 inline h-4 w-4 text-accent" /> 10–15 minute interviews on Zoom
+            <Card className="surface-soft h-full overflow-hidden">
+              <CardContent className="p-6 text-neutral-200 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-accent" />
+                  <h3 className="text-white font-semibold">Format</h3>
+                </div>
+                <p className="flex items-start gap-2">
+                  <Mic className="mt-1 h-4 w-4 text-accent" /> 10–15 minute interviews on Zoom
                 </p>
-                <p>
-                  <Users className="mr-2 inline h-4 w-4 text-accent" /> Choose your category in advance
+                <p className="flex items-start gap-2">
+                  <Users className="mt-1 h-4 w-4 text-accent" /> Choose your category in advance
                 </p>
-                <p>
-                  <Laptop className="mr-2 inline h-4 w-4 text-accent" /> Background briefs posted closer to the date
+                <p className="flex items-start gap-2">
+                  <Laptop className="mt-1 h-4 w-4 text-accent" /> Background briefs posted closer to the date
                 </p>
               </CardContent>
             </Card>

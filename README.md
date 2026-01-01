@@ -31,7 +31,7 @@ A modern, accessible website for the Student Research Initiative at McGill Unive
   /(site)
     /layout.tsx          # Shell with Topbar + Sidebar + Footer
     /page.tsx            # Home page
-    /fssn-2023/page.tsx  # Faculty Student Speed Networking
+    /fssn-2025/page.tsx  # Faculty Student Speed Networking
     /resources/page.tsx  # Resources with tabbed navigation
     /volunteer-database/page.tsx # Volunteer database (members only)
     /membership/page.tsx # Membership (coming soon)
@@ -61,8 +61,39 @@ A modern, accessible website for the Student Research Initiative at McGill Unive
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm, yarn, or pnpm
+- Docker Desktop (for local Postgres)
+
+### McGill Research Network (new)
+
+The crimson-themed research network lives under `/network` and ships with role-aware auth, profiles, and a job board.
+
+#### Quick start
+
+```bash
+pnpm install
+pnpm db:up
+cp .env.example .env.local
+# edit .env.local with your credentials
+pnpm prisma:generate
+pnpm prisma:migrate
+pnpm seed:network
+pnpm dev
+```
+
+Visit <http://localhost:3000/network> and sign in with a `@mail.mcgill.ca` address to experience the student flow. Faculty (`@mcgill.ca`) and admins (from `ADMIN_EMAILS`) get the posting dashboard.
+
+#### Running tests
+
+```bash
+pnpm test       # Vitest unit + integration (mocks Prisma)
+pnpm test:e2e   # Playwright smoke (start dev server, set PLAYWRIGHT_E2E=true)
+```
+
+#### Theme tokens
+
+Adjust crimson/white surfaces in `app/(network)/network/globals-network.css`.
 
 ### Installation
 
@@ -105,7 +136,15 @@ The following environment variables are optional and enable additional integrati
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `RESEND_API_KEY` | Resend API key for email notifications | No |
+| `DATABASE_URL` | Postgres connection string (local or managed) | Yes |
+| `NEXTAUTH_URL` | Base URL for NextAuth callbacks | Yes |
+| `NEXTAUTH_SECRET` | Secret for NextAuth JWT/session encryption | Yes |
+| `ADMIN_EMAILS` | Comma-delimited list of network admins | Recommended |
+| `EMAIL_FROM` | From address for magic-link emails | Recommended |
+| `RESEND_API_KEY` | Resend API key for production email notifications | No |
+| `SMTP_HOST`/`SMTP_USER` | Development SMTP (Ethereal auto-config otherwise) | No |
+| `UPSTASH_REDIS_REST_URL` | Optional rate-limit Redis endpoint | No |
+| `UPSTASH_REDIS_REST_TOKEN` | Optional rate-limit Redis token | No |
 | `CONTACT_TO_EMAIL` | Email address to receive contact form submissions | No |
 | `SLACK_WEBHOOK_URL` | Slack webhook URL for contact notifications | No |
 
