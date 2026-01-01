@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { Award, CalendarClock, FileText, Sparkles } from "lucide-react"
 import { Section } from "@/components/Section"
 import { FancyButton } from "@/components/FancyButton"
 import ResourcesNav from "@/components/ResourcesNav"
@@ -11,22 +12,84 @@ import { fadeUp, staggerChildren } from "@/lib/motion"
 export default function SRIStudentshipAwardPage() {
   return (
     <>
-      <Section className="pt-20 lg:pt-28">
+      <Section className="pt-20 lg:pt-28 relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-70">
+          <div className="absolute -top-24 left-8 h-72 w-72 rounded-full bg-amber-300/15 blur-3xl" />
+          <div className="absolute top-12 right-10 h-80 w-80 rounded-full bg-fuchsia-400/10 blur-3xl" />
+          <div className="absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
+        </div>
+
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          className="mx-auto max-w-5xl"
+          className="relative mx-auto max-w-6xl"
         >
           <p className="text-accent font-medium text-sm uppercase tracking-wider mb-2">Funding</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-white mb-2">SRI Studentship Award</h1>
-          <ResourcesNav />
-          <p className="text-neutral-300 text-lg mt-4">($1000)</p>
-          <p className="text-neutral-200 mt-4">
-            One of the main goals of the Student Research Initiative is to help students become involved in research.
-            Each year, we sponsor a student researcher under the SRI Award over the summer, allowing the student to
-            gain research experience while decreasing the financial burden on the supervisor.
-          </p>
+          <ResourcesNav className="mt-4" />
+
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1fr,380px] lg:items-center">
+            <div className="space-y-4">
+              <p className="text-neutral-300 text-lg">($1000)</p>
+              <p className="text-neutral-200">
+                One of the main goals of the Student Research Initiative is to help students become involved in research.
+                Each year, we sponsor a student researcher under the SRI Award over the summer, allowing the student to
+                gain research experience while decreasing the financial burden on the supervisor.
+              </p>
+              <div className="flex flex-wrap gap-3 pt-2">
+                <FancyButton asChild>
+                  <Link href="#" target="_blank" rel="noopener noreferrer">
+                    Application (coming soon)
+                  </Link>
+                </FancyButton>
+                <FancyButton asChild variant="secondary">
+                  <Link href="#" target="_blank" rel="noopener noreferrer">
+                    Past Winners
+                  </Link>
+                </FancyButton>
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-primary-900/25 p-7 glass">
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-amber-300/15 via-transparent to-fuchsia-400/10" />
+              <div className="relative space-y-4">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
+                  <Sparkles className="h-4 w-4 text-accent" />
+                  2026 cycle
+                </div>
+                <div className="grid gap-3">
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <div className="flex items-start gap-3">
+                      <Award className="mt-0.5 h-5 w-5 text-accent" />
+                      <div>
+                        <p className="font-semibold text-white">Award</p>
+                        <p className="text-sm text-white/70">$1000 support for summer research.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <div className="flex items-start gap-3">
+                      <CalendarClock className="mt-0.5 h-5 w-5 text-accent" />
+                      <div>
+                        <p className="font-semibold text-white">Timeline</p>
+                        <p className="text-sm text-white/70">Opens soon — check back for dates.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <div className="flex items-start gap-3">
+                      <FileText className="mt-0.5 h-5 w-5 text-accent" />
+                      <div>
+                        <p className="font-semibold text-white">What you submit</p>
+                        <p className="text-sm text-white/70">Application + supervisor sign-off.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </Section>
 
@@ -70,13 +133,13 @@ export default function SRIStudentshipAwardPage() {
               <CardContent className="space-y-4 p-6">
                 <h3 className="text-white font-semibold">Application</h3>
                 <p className="text-neutral-200">
-                  The application for the 2024 SRI Award is now open. Please check the application form for more
+                  The application for the 2026 SRI Award will open soon. Please check the application form for more
                   details.
                 </p>
                 <div className="mt-1 flex flex-wrap gap-3">
                   <FancyButton asChild>
                     <Link href="#" target="_blank" rel="noopener noreferrer">
-                      Application
+                      Application (coming soon)
                     </Link>
                   </FancyButton>
                   <FancyButton asChild variant="secondary">
