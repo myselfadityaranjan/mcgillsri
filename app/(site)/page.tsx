@@ -3,11 +3,11 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
-import { Target, Users, GraduationCap, Calendar, ArrowRight } from "lucide-react"
+import { Calendar, ArrowRight } from "lucide-react"
 import { Section } from "@/components/Section"
-import { CardFeature } from "@/components/CardFeature"
 import { FancyButton } from "@/components/FancyButton"
 import { EmptyState } from "@/components/EmptyState"
+import { ImpactTimeline } from "@/components/ImpactTimeline"
 import { CONTENT } from "@/lib/constants"
 import { fadeUp, staggerChildren } from "@/lib/motion"
 
@@ -86,34 +86,8 @@ export default function HomePage() {
 
       {/* Pillars Section */}
       <Section kicker="Our Approach" title="How We Make a Difference" centered>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerChildren()}
-          className="grid md:grid-cols-3 gap-8"
-        >
-          <motion.div variants={fadeUp}>
-            <CardFeature
-              icon={Target}
-              title="Create Opportunities"
-              description="We work tirelessly to establish new research positions and funding opportunities for undergraduate students across all disciplines."
-            />
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <CardFeature
-              icon={Users}
-              title="Connect Students & Labs"
-              description="Our networking events and database bridge the gap between motivated students and research labs seeking talented undergraduates."
-            />
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <CardFeature
-              icon={GraduationCap}
-              title="Teach Research Skills"
-              description="We provide resources, workshops, and guidance to help students develop the skills needed to excel in research environments."
-            />
-          </motion.div>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+          <ImpactTimeline />
         </motion.div>
       </Section>
 
