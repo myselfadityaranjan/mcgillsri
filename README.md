@@ -31,7 +31,7 @@ A modern, accessible website for the Student Research Initiative at McGill Unive
   /(site)
     /layout.tsx          # Shell with Topbar + Sidebar + Footer
     /page.tsx            # Home page
-    /fssn-2023/page.tsx  # Faculty Student Speed Networking
+    /fssn-2025/page.tsx  # Faculty Student Speed Networking
     /resources/page.tsx  # Resources with tabbed navigation
     /volunteer-database/page.tsx # Volunteer database (members only)
     /membership/page.tsx # Membership (coming soon)

@@ -126,7 +126,7 @@ export default function HomePage() {
             description="We're planning exciting networking opportunities and workshops. Stay tuned for announcements about our next Faculty Student Speed Networking event and research skills workshops."
           >
             <FancyButton asChild variant="secondary">
-              <Link href="/fssn-2023">Learn About FSSN 2023</Link>
+              <Link href="/fssn-2025">Learn About FSSN 2025</Link>
             </FancyButton>
           </EmptyState>
         </motion.div>
