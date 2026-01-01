@@ -37,7 +37,7 @@ export function ResourceWheel({ items, className }: { items: ResourceWheelItem[]
   const activeItem = items[safeActive]
 
   return (
-    <div className={cn("mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[520px,1fr]", className)}>
+    <div className={cn("mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[520px,1fr] lg:min-h-[620px]", className)}>
       <div className="relative mx-auto w-full max-w-[520px]">
         <div className="relative aspect-square">
           <div className="absolute inset-0 rounded-full border border-white/10 bg-primary-900/25 glass" />
@@ -62,7 +62,7 @@ export function ResourceWheel({ items, className }: { items: ResourceWheelItem[]
                     "focus-ring rounded-3xl",
                   )}
                   style={{
-                    transform: `translate(-50%, -50%) rotate(${angle}deg) translate(0, -205px) rotate(${-angle}deg)`,
+                    transform: `translate(-50%, -50%) rotate(${angle}deg) translate(0, -190px) rotate(${-angle}deg)`,
                   }}
                   aria-label={item.title}
                 >
@@ -71,7 +71,7 @@ export function ResourceWheel({ items, className }: { items: ResourceWheelItem[]
                     animate={isActive ? { scale: 1.07, y: -2 } : { scale: 1, y: 0 }}
                     transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                     className={cn(
-                      "group relative w-[200px] overflow-hidden rounded-3xl border bg-primary-900/30 p-4 text-left backdrop-blur",
+                      "group relative w-[190px] overflow-hidden rounded-3xl border bg-primary-900/30 p-4 text-left backdrop-blur",
                       isActive
                         ? "border-white/20 shadow-[0_0_0_1px_rgba(59,167,255,0.25),0_28px_70px_-45px_rgba(59,167,255,0.7)]"
                         : "border-white/10 hover:border-white/15 hover:shadow-[0_20px_55px_-44px_rgba(59,167,255,0.45)]",
@@ -161,4 +161,3 @@ export function ResourceWheel({ items, className }: { items: ResourceWheelItem[]
     </div>
   )
 }
-

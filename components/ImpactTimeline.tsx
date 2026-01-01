@@ -2,8 +2,8 @@
 
 import { useMemo, useRef, useState } from "react"
 import { motion, useMotionValueEvent, useScroll } from "framer-motion"
+import { GraduationCap, Target, Users } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
-import { Target, Users, GraduationCap } from "lucide-react"
 
 type TimelineStep = {
   number: 1 | 2 | 3
@@ -46,37 +46,43 @@ export function ImpactTimeline() {
   const [activeStep, setActiveStep] = useState(0)
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    const next =
-      value < 0.18 ? 0 :
-      value < 0.52 ? 1 :
-      value < 0.86 ? 2 :
-      3
+    const next = value < 0.18 ? 0 : value < 0.5 ? 1 : value < 0.85 ? 2 : 3
     setActiveStep(next)
   })
 
-  const layout = useMemo(() => {
-    return steps.map((step, index) => ({
-      step,
-      align: index % 2 === 0 ? "left" : "right",
-    }))
-  }, [])
+  const layout = useMemo(
+    () =>
+      steps.map((step, index) => ({
+        step,
+        align: index % 2 === 0 ? "left" : "right",
+      })),
+    [],
+  )
+
+  const offsets = ["8%", "52%", "88%"] as const
 
   return (
     <div ref={sectionRef} className="relative mx-auto max-w-6xl">
-      <div className="relative h-[170vh]">
-        <div className="sticky top-24 flex h-[calc(100vh-6rem)] items-center">
+      <div className="relative h-[185vh]">
+        <div className="sticky top-20 flex h-[calc(100vh-5rem)] items-center">
           {/* Desktop timeline */}
           <div className="relative hidden w-full md:block">
-            <div className="relative mx-auto h-[72vh] min-h-[560px] w-full">
+            <div className="relative mx-auto h-[78vh] min-h-[640px] w-full">
               <div className="pointer-events-none absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-white/10" />
               <motion.div
                 className="pointer-events-none absolute inset-y-0 left-1/2 w-px -translate-x-1/2 origin-top bg-gradient-to-b from-accent via-emerald-300 to-transparent shadow-[0_0_18px_rgba(59,167,255,0.35)]"
                 style={{ scaleY: scrollYProgress }}
               />
 
-              <div className="grid h-full grid-rows-3 gap-10">
-                {layout.map(({ step, align }) => (
-                  <TimelineRow key={step.title} step={step} align={align} isActive={activeStep >= step.number} />
+              <div className="relative h-full">
+                {layout.map(({ step, align }, index) => (
+                  <DesktopRow
+                    key={step.title}
+                    step={step}
+                    align={align}
+                    isActive={activeStep >= step.number}
+                    offset={offsets[index] ?? "50%"}
+                  />
                 ))}
               </div>
             </div>
@@ -101,17 +107,68 @@ export function ImpactTimeline() {
   )
 }
 
-function TimelineRow({
+function DesktopRow({
   step,
   align,
   isActive,
+  offset,
 }: {
   step: TimelineStep
   align: "left" | "right"
   isActive: boolean
+  offset: string
 }) {
   const Icon = step.icon
-  const card = (
+  return (
+    <div className="absolute left-0 right-0" style={{ top: offset }}>
+      <div className="grid grid-cols-[1fr,200px,1fr] items-center">
+        <motion.div
+          className={[
+            "pointer-events-none absolute top-1/2 h-px w-[calc(50%-170px)] -translate-y-1/2",
+            align === "left" ? "right-1/2 origin-right" : "left-1/2 origin-left",
+            "bg-gradient-to-r from-accent/75 via-emerald-300/35 to-transparent shadow-[0_0_18px_rgba(59,167,255,0.25)]",
+          ].join(" ")}
+          animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+          transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+        />
+
+        <div className={align === "left" ? "pr-10" : ""}>{align === "left" ? <TimelineCard step={step} isActive={isActive} /> : null}</div>
+
+        <div className="relative">
+          <motion.div
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            animate={isActive ? { y: -6, scale: 1.08 } : { y: 0, scale: 1 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="relative">
+              <div
+                className={[
+                  "absolute -inset-3 rounded-full blur-xl transition-opacity duration-500",
+                  isActive ? "opacity-100 bg-[radial-gradient(circle,rgba(59,167,255,0.55),transparent_60%)]" : "opacity-0",
+                ].join(" ")}
+              />
+              <div
+                className={[
+                  "relative h-12 w-12 rounded-full border border-white/15 bg-primary-900/35 backdrop-blur",
+                  "grid place-items-center text-sm font-semibold",
+                  isActive ? "text-white shadow-[0_0_0_1px_rgba(59,167,255,0.25)]" : "text-white/70",
+                ].join(" ")}
+              >
+                {step.number}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className={align === "right" ? "pl-10" : ""}>{align === "right" ? <TimelineCard step={step} isActive={isActive} /> : null}</div>
+      </div>
+    </div>
+  )
+}
+
+function TimelineCard({ step, isActive }: { step: TimelineStep; isActive: boolean }) {
+  const Icon = step.icon
+  return (
     <motion.article
       initial={false}
       animate={
@@ -121,7 +178,7 @@ function TimelineRow({
       }
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       className={[
-        "group relative w-full max-w-xl rounded-3xl border border-white/10 bg-primary-900/20 p-7 glass",
+        "group relative w-full max-w-xl rounded-3xl border border-white/10 bg-primary-900/25 p-7 glass",
         "shadow-[0_18px_60px_-42px_rgba(0,0,0,0.75)]",
         "pointer-events-auto",
       ].join(" ")}
@@ -146,50 +203,6 @@ function TimelineRow({
         </div>
       </div>
     </motion.article>
-  )
-
-  return (
-    <div className="relative grid grid-cols-[1fr,220px,1fr] items-center">
-      <motion.div
-        className={[
-          "pointer-events-none absolute top-1/2 h-px w-[calc(50%-180px)] -translate-y-1/2",
-          align === "left" ? "right-1/2 origin-right" : "left-1/2 origin-left",
-          "bg-gradient-to-r from-accent/75 via-emerald-300/35 to-transparent shadow-[0_0_18px_rgba(59,167,255,0.25)]",
-        ].join(" ")}
-        animate={isActive ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-        transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-      />
-
-      <div className={align === "left" ? "pr-10" : ""}>{align === "left" ? card : null}</div>
-
-      <div className="relative">
-        <motion.div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          animate={isActive ? { y: -6, scale: 1.08 } : { y: 0, scale: 1 }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="relative">
-            <div
-              className={[
-                "absolute -inset-3 rounded-full blur-xl transition-opacity duration-500",
-                isActive ? "opacity-100 bg-[radial-gradient(circle,rgba(59,167,255,0.55),transparent_60%)]" : "opacity-0",
-              ].join(" ")}
-            />
-            <div
-              className={[
-                "relative h-12 w-12 rounded-full border border-white/15 bg-primary-900/35 backdrop-blur",
-                "grid place-items-center text-sm font-semibold",
-                isActive ? "text-white shadow-[0_0_0_1px_rgba(59,167,255,0.25)]" : "text-white/70",
-              ].join(" ")}
-            >
-              {step.number}
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      <div className={align === "right" ? "pl-10" : ""}>{align === "right" ? card : null}</div>
-    </div>
   )
 }
 
@@ -235,3 +248,4 @@ function MobileRow({ step, isActive }: { step: TimelineStep; isActive: boolean }
     </motion.div>
   )
 }
+

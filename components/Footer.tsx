@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Github, Twitter, Mail } from "lucide-react"
+import { Instagram, Mail, X } from "lucide-react"
 
 export function Footer() {
   return (
@@ -9,21 +9,21 @@ export function Footer() {
           {/* Social Links */}
           <div className="flex items-center gap-4">
             <Link
-              href="#"
+              href="https://www.instagram.com/p/DQaVnpUDLJJ/"
               className="rounded-lg p-2 text-neutral-400 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/10 hover:text-white focus-ring"
-              aria-label="GitHub"
+              aria-label="Instagram"
             >
-              <Github className="h-5 w-5" />
+              <Instagram className="h-5 w-5" />
             </Link>
             <Link
               href="#"
               className="rounded-lg p-2 text-neutral-400 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/10 hover:text-white focus-ring"
-              aria-label="Twitter"
+              aria-label="X (Twitter)"
             >
-              <Twitter className="h-5 w-5" />
+              <X className="h-5 w-5" />
             </Link>
             <Link
-              href="#"
+              href="mailto:sri.ssmu@gmail.com?subject=Hello%20SRI&body=Hi%20SRI%20team%2C%20"
               className="rounded-lg p-2 text-neutral-400 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-white/10 hover:text-white focus-ring"
               aria-label="Email"
             >
